@@ -1,4 +1,9 @@
 import logo from "./logo.svg";
 import home_phone from "./home-phones.png";
 
-export { logo, home_phone };
+import screenshot1 from "./screenshot1.png";
+import screenshot2 from "./screenshot2.png";
+import screenshot3 from "./screenshot3.png";
+import screenshot4 from "./screenshot4.png";
+
+export { logo, home_phone, screenshot1, screenshot2, screenshot3, screenshot4 };

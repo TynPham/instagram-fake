@@ -1,6 +1,5 @@
-import { home_phone } from "@/assets/images";
-import { authFooter } from "@/data/auth-footer";
-import Image from "next/image";
+import { authFooter } from "@/data/auth.dummy";
+import ScreenshotSlider from "./components/screenshot-slider";
 
 export interface AuthLayoutProps {
   children: React.ReactNode;
@@ -9,8 +8,8 @@ export interface AuthLayoutProps {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="flex flex-col justify-between items-center min-h-screen">
-      <div className="w-full flex-1 flex justify-center gap-4 pt-8 items-center">
-        <Image src={home_phone} width={465} height={635} alt="home_phone" className="object-cover h-4/5" />
+      <div className="w-full flex-1 flex justify-center gap-10 pt-8 items-center">
+        <ScreenshotSlider />
         {children}
       </div>
       <div className="p-8 flex flex-col gap-6 items-center justify-center text-xs text-zinc-500 pb-16">
