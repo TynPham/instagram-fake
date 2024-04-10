@@ -4,22 +4,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters",
-  }),
-});
+import authApi from "@/apis/auth.api";
+import { LoginReqBodyType, loginReqBodySchema } from "@/schemaValidations/auth.schema";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { path } from "@/constants/path";
+import { handleErrorApi } from "@/lib/utils";
 
 export interface LoginFormProps {}
 
 export default function LoginForm(props: LoginFormProps) {
+  const { toast } = useToast();
+  const router = useRouter();
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<LoginReqBodyType>({
+    resolver: zodResolver(loginReqBodySchema),
     defaultValues: {
       email: "",
       password: "",
@@ -27,10 +28,20 @@ export default function LoginForm(props: LoginFormProps) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: LoginReqBodyType) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    try {
+      const res = await authApi.login(values);
+      await authApi.auth(res.payload.result);
+      toast({
+        description: res.payload.message,
+      });
+      router.push(path.home);
+      router.refresh();
+    } catch (error) {
+      handleErrorApi(error, form.setError);
+    }
   }
 
   return (

@@ -2,6 +2,7 @@ import { Collection, Db, MongoClient } from 'mongodb'
 import { config } from 'dotenv'
 import { envConfig } from '~/utils/config'
 import { User } from '~/models/schemas/User.schema'
+import { RefreshToken } from '~/models/schemas/refresh_token.schema'
 config()
 const uri = `mongodb+srv://${envConfig.mongodbUsername}:${envConfig.mongodbPassword}@instagram-dev.xuoa8cn.mongodb.net/?retryWrites=true&w=majority&appName=Instagram-dev`
 
@@ -25,6 +26,10 @@ class DataBaseService {
 
   get users(): Collection<User> {
     return this.db.collection(envConfig.mongodbUsersCollection)
+  }
+
+  get refresh_tokens(): Collection<RefreshToken> {
+    return this.db.collection(envConfig.mongodbRefreshTokenCollection)
   }
 }
 

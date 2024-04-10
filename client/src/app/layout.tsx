@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import AppProvider from "@/provider/app.provider";
+import { cookies } from "next/headers";
 
 const SegoeUI = localFont({ src: "../assets/fonts/SVN-Segoe-UI.ttf" });
 
@@ -14,9 +17,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookiesStore = cookies();
+  const access_token = cookiesStore.get("access_token")?.value;
+  const refresh_token = cookiesStore.get("refresh_token")?.value;
   return (
     <html lang="en">
-      <body className={SegoeUI.className}>{children}</body>
+      <body className={SegoeUI.className}>
+        <AppProvider initToken={{ access_token, refresh_token }}>
+          {children} <Toaster />
+        </AppProvider>
+      </body>
     </html>
   );
 }

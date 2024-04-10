@@ -7,7 +7,6 @@ export type UserType = {
   username: string
   email: string
   password: string
-  email_verify_token?: string
   forgot_password_token?: string
   verify_status?: UserVerifyStatus
   account_type?: UserAccountType
@@ -28,7 +27,6 @@ export class User {
   username: string
   email: string
   password: string
-  email_verify_token?: string
   forgot_password_token?: string
   verify_status?: UserVerifyStatus
   account_type?: UserAccountType
@@ -49,7 +47,6 @@ export class User {
     this.name = user.name
     this.email = user.email
     this.password = user.password
-    this.email_verify_token = user.email_verify_token || ''
     this.forgot_password_token = user.forgot_password_token || ''
     this.verify_status = user.verify_status || UserVerifyStatus.Unverified
     this.account_type = user.account_type || UserAccountType.PUBLIC

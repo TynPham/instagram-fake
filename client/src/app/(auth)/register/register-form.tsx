@@ -2,30 +2,24 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(3, {
-    message: "Name must be at least 3 characters",
-  }),
-  username: z.string().min(3, {
-    message: "Name must be at least 3 characters",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters",
-  }),
-});
+import { RegisterReqBodyType, registerReqBodySchema } from "@/schemaValidations/auth.schema";
+import authApi from "@/apis/auth.api";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { handleErrorApi } from "@/lib/utils";
+import { path } from "@/constants/path";
 
 export interface RegisterFormProps {}
 
 export default function RegisterForm(props: RegisterFormProps) {
+  const { toast } = useToast();
+  const router = useRouter();
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<RegisterReqBodyType>({
+    resolver: zodResolver(registerReqBodySchema),
     defaultValues: {
       email: "",
       name: "",
@@ -35,10 +29,20 @@ export default function RegisterForm(props: RegisterFormProps) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: RegisterReqBodyType) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    try {
+      const res = await authApi.register(values);
+      await authApi.auth(res.payload.result);
+      toast({
+        description: res.payload.message,
+      });
+      router.push(path.home);
+      router.refresh();
+    } catch (error) {
+      handleErrorApi(error, form.setError);
+    }
   }
 
   return (
