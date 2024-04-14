@@ -8,7 +8,7 @@ import postRouter from './routes/post.routes'
 import mediaRouter from './routes/media.routes'
 import { initFolder } from './utils/files'
 import { UPLOAD_IMAGE_TEMP_DIR } from './constants/dir'
-// import './utils/fake'
+import './utils/fake'
 
 const app = express()
 const POST = 4000

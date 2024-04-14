@@ -11,16 +11,17 @@ import { hashPassword } from '~/utils/crypto'
 
 const PASSWORD = 'Tuyen123123'
 
-const MYID = new ObjectId('661b79c3378823604b0c48ff')
+const MYID = new ObjectId('661c0a0f7991e626a210a281')
 
 const USER_COUNT = 30
 
 const createRandomUser = () => {
-  const user: RegisterReqBody = {
+  const user: RegisterReqBody & { avatar: string } = {
     username: faker.internet.userName(),
     name: faker.internet.displayName(),
     email: faker.internet.email(),
-    password: hashPassword(PASSWORD)
+    password: hashPassword(PASSWORD),
+    avatar: faker.internet.avatar()
   }
   return user
 }

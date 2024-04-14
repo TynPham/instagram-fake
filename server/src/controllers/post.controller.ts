@@ -34,11 +34,9 @@ export const getNewFeedsController = async (
 
   return res.status(HTTP_STATUS_CODE.OK).json({
     message: POST_MESSAGES.GET_NEW_FEEDS_SUCCESSFULLY,
-    result: {
-      posts: result.posts,
-      limit,
-      page,
-      totalPage: Math.ceil(result.total / limit)
-    }
+    result: result.posts,
+    limit,
+    page,
+    totalPage: Math.ceil(result.total / limit)
   })
 }

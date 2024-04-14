@@ -61,7 +61,8 @@ class PostServices {
                     _id: '$$item._id',
                     name: '$$item.name',
                     username: '$$item.username',
-                    email: '$$item.email'
+                    email: '$$item.email',
+                    avatar: '$$item.avatar'
                   }
                 }
               }
