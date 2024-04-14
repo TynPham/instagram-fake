@@ -30,7 +30,7 @@ class AuthServices {
 
   async login(user_id: string) {
     const [access_token, refresh_token] = await this.signBothTokens(user_id)
-    await database.refresh_tokens.insertOne(new RefreshToken({ user_id, token: refresh_token }))
+    await database.refresh_tokens.insertOne(new RefreshToken({ user_id: new ObjectId(user_id), token: refresh_token }))
 
     return {
       access_token,
@@ -42,7 +42,7 @@ class AuthServices {
     const user_id = new ObjectId()
     await database.users.insertOne(new User({ ...body, _id: user_id, password: hashPassword(body.password) }))
     const [access_token, refresh_token] = await this.signBothTokens(user_id.toString())
-    await database.refresh_tokens.insertOne(new RefreshToken({ user_id: user_id.toString(), token: refresh_token }))
+    await database.refresh_tokens.insertOne(new RefreshToken({ user_id, token: refresh_token }))
     return {
       access_token,
       refresh_token

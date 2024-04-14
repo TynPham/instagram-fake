@@ -1,8 +1,13 @@
 import { Request } from 'express'
 import { ParamSchema, checkSchema } from 'express-validator'
+import { JsonWebTokenError } from 'jsonwebtoken'
+import { HTTP_STATUS_CODE } from '~/constants/httpStatusCode'
 import { USER_MESSAGES } from '~/constants/messages'
+import { ErrorWithStatus } from '~/models/errors'
 import database from '~/services/database.services'
+import { envConfig } from '~/utils/config'
 import { hashPassword } from '~/utils/crypto'
+import { verifyToken } from '~/utils/jwt'
 import { validate } from '~/utils/validation'
 
 const emailSchema: ParamSchema = {
@@ -100,5 +105,43 @@ export const registerValidator = validate(
       password: passwordSchema
     },
     ['body']
+  )
+)
+
+export const accessTokenValidator = validate(
+  checkSchema(
+    {
+      Authorization: {
+        trim: true,
+        custom: {
+          options: async (value, { req }) => {
+            const access_token = (value || '').split(' ')[1]
+            if (!access_token) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS_CODE.UNAUTHORIZED,
+                message: USER_MESSAGES.ACCESS_TOKEN_IS_REQUIRED
+              })
+            }
+            try {
+              const decoded_authorization = await verifyToken({
+                token: access_token,
+                privateKey: envConfig.accessTokenSecret
+              })
+              ;(req as Request).decoded_authorization = decoded_authorization
+              return true
+            } catch (error) {
+              if (error instanceof JsonWebTokenError) {
+                throw new ErrorWithStatus({
+                  status: HTTP_STATUS_CODE.UNAUTHORIZED,
+                  message: error.message || USER_MESSAGES.ACCESS_TOKEN_IS_INVALID
+                })
+                throw error
+              }
+            }
+          }
+        }
+      }
+    },
+    ['headers']
   )
 )

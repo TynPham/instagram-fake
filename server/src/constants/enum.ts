@@ -14,3 +14,8 @@ export enum TokenType {
   RefreshToken,
   ForgotPasswordToken
 }
+
+export enum Media {
+  Image,
+  Video
+}

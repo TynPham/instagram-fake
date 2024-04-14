@@ -1,15 +1,17 @@
+import { ObjectId } from 'mongodb'
+
 interface RefreshTokenType {
-  _id?: string
-  user_id: string
+  _id?: ObjectId
+  user_id: ObjectId
   token: string
   created_at?: Date
 }
 
 export class RefreshToken {
-  _id?: string
-  user_id: string
+  _id?: ObjectId
+  user_id: ObjectId
   token: string
-  created_at?: Date
+  created_at: Date
 
   constructor(refreshToken: RefreshTokenType) {
     this._id = refreshToken._id

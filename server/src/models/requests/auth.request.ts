@@ -14,6 +14,6 @@ export interface LoginReqBody {
 }
 
 export interface TokenPayload extends JwtPayload {
-  User_id: string
+  user_id: string
   token_type: TokenType
 }

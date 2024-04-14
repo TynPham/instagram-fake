@@ -31,8 +31,8 @@ export class User {
   verify_status?: UserVerifyStatus
   account_type?: UserAccountType
 
-  created_at?: Date
-  updated_at?: Date
+  created_at: Date
+  updated_at: Date
 
   gender?: string
   day_of_birth?: string

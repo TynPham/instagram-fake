@@ -3,6 +3,8 @@ import { config } from 'dotenv'
 import { envConfig } from '~/utils/config'
 import { User } from '~/models/schemas/User.schema'
 import { RefreshToken } from '~/models/schemas/refresh_token.schema'
+import { Follower } from '~/models/schemas/follower.schema'
+import { Post } from '~/models/schemas/post.schema'
 config()
 const uri = `mongodb+srv://${envConfig.mongodbUsername}:${envConfig.mongodbPassword}@instagram-dev.xuoa8cn.mongodb.net/?retryWrites=true&w=majority&appName=Instagram-dev`
 
@@ -30,6 +32,14 @@ class DataBaseService {
 
   get refresh_tokens(): Collection<RefreshToken> {
     return this.db.collection(envConfig.mongodbRefreshTokenCollection)
+  }
+
+  get followers(): Collection<Follower> {
+    return this.db.collection(envConfig.mongodbFollowersCollection)
+  }
+
+  get posts(): Collection<Post> {
+    return this.db.collection(envConfig.mongodbPostsCollection)
   }
 }
 
