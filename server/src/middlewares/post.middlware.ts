@@ -71,3 +71,41 @@ export const createPostValidator = validate(
     ['body']
   )
 )
+
+export const paginationValidator = validate(
+  checkSchema(
+    {
+      limit: {
+        isNumeric: true,
+        custom: {
+          options: (value, { req }) => {
+            const limit = Number(value)
+            if (limit > 100 || limit < 0) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS_CODE.BAD_REQUEST,
+                message: '0 <= limit <= 100'
+              })
+            }
+            return true
+          }
+        }
+      },
+      page: {
+        isNumeric: true,
+        custom: {
+          options: (value) => {
+            const page = Number(value)
+            if (page <= 0) {
+              throw new ErrorWithStatus({
+                status: HTTP_STATUS_CODE.BAD_REQUEST,
+                message: 'page > 0'
+              })
+            }
+            return true
+          }
+        }
+      }
+    },
+    ['query']
+  )
+)
