@@ -38,7 +38,7 @@ export const USER_MESSAGES = {
   VERIFY_FORGOT_PASSWORD_SUCCESS: 'Verify forgot password success',
   INVALID_FORGOT_PASSWORD_TOKEN: 'Invalid forgot password token',
   RESET_PASSWORD_SUCCESS: 'Reset password success',
-  GET_ME_SUCCESS: 'Get my profile success',
+  GET_ME_SUCCESSFULLY: 'Get my profile successfully',
   USER_NOT_VERIFIED: 'User not verified',
   BIO_MUST_BE_STRING: 'Bio must be a string',
   BIO_LENGTH: 'Bio length must be from 1 to 200',

@@ -25,6 +25,21 @@ class UserServices {
       message: USER_MESSAGES.FOLLOWED
     }
   }
+
+  async getMe(user_id: string) {
+    const user = await database.users.findOne(
+      {
+        _id: new ObjectId(user_id)
+      },
+      {
+        projection: {
+          password: 0,
+          forgot_password_token: 0
+        }
+      }
+    )
+    return user
+  }
 }
 
 const userServices = new UserServices()

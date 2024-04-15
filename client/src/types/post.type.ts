@@ -17,4 +17,15 @@ export type Post = {
     email: string;
     avatar: string;
   };
+  bookmarks: Bookmark[];
+  likes: Like[];
 };
+
+export type Bookmark = {
+  _id: string;
+  post_id: string;
+  user_id: string;
+  created_at: string | Date;
+};
+
+export type Like = Bookmark;

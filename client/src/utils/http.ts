@@ -64,7 +64,15 @@ export class EntityError extends HttpError {
 
 const request = async <Response>(method: HttpMethod, url: string, options?: CustomRequestOptions) => {
   const body = options?.body ? (options.body instanceof FormData ? options.body : JSON.stringify(options.body)) : undefined;
-  const baseHeaders = options?.body instanceof FormData ? {} : { "Content-Type": "application/json" };
+  const baseHeaders =
+    body instanceof FormData
+      ? {
+          Authorization: clientToken.getAccessToken() ? `Bearer ${clientToken.getAccessToken()}` : "",
+        }
+      : {
+          "Content-Type": "application/json",
+          Authorization: clientToken.getAccessToken() ? `Bearer ${clientToken.getAccessToken()}` : "",
+        };
   const baseUrl = options?.baseUrl === undefined ? process.env.NEXT_PUBLIC_API_ENDPOINT : options.baseUrl;
   const fullUrl = url.startsWith("/") ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
 

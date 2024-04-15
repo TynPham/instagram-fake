@@ -10,6 +10,7 @@ import postsApi from "@/apis/posts.api";
 import { cookies } from "next/headers";
 import TextMore from "@/components/TextMore";
 import { formatDistance } from "date-fns";
+import Post from "./components/post";
 
 export default async function Home() {
   const cookieStore = cookies();
@@ -24,42 +25,7 @@ export default async function Home() {
         </div>
         <div className="flex flex-col gap-2 md:w-[80%]">
           {posts.map((post) => (
-            <div key={post._id} className="flex flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Avatar className="w-10 h-10">
-                    <AvatarImage src={post.user.avatar || "https://github.com/shadcn.png"} />
-                  </Avatar>
-                  <article className="flex items-center gap-2 text-zinc-500 text-sm">
-                    <h3 className="font-bold text-black">{post.user.username}</h3>
-                    <span>{formatDistance(new Date(post.created_at), new Date(), { addSuffix: true })}</span>
-                  </article>
-                </div>
-                <HiOutlineDotsHorizontal className="w-6 h-6" />
-              </div>
-              <div>
-                <Image src={post.medias[0].url} width={500} height={500} className="object-cover rounded-md w-full h-full" alt="post-image" />
-              </div>
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-4">
-                  <AiOutlineHeart className="w-7 h-7 " />
-                  <FaRegComment className="w-7 h-7" />
-                  <FiSend className="w-7 h-7 " />
-                </div>
-                <FiBookmark className="w-7 h-7 " />
-              </div>
-              <article className="flex flex-col gap-2 text-sm">
-                <h3 className="font-bold">305 likes</h3>
-                <TextMore containerClass="inline-block whitespace-pre-wrap" content={post.captions}>
-                  <span className="font-bold mr-1">{post.user.username}</span>
-                </TextMore>
-                <span className="text-zinc-400">View all 3 comments</span>
-                <Input
-                  placeholder="Add a comment..."
-                  className="border-0 border-b rounded-none pl-0 focus-within:!ring-0 focus-within:!ring-offset-0"
-                />
-              </article>
-            </div>
+            <Post key={post._id} post={post} />
           ))}
         </div>
       </div>

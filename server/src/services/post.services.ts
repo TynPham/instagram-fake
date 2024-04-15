@@ -96,9 +96,6 @@ class PostServices {
                     $eq: ['$$item.user_id', user_id_obj]
                   }
                 }
-              },
-              likes: {
-                $size: '$likes'
               }
             }
           },
