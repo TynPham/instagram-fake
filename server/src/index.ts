@@ -8,7 +8,9 @@ import postRouter from './routes/post.routes'
 import mediaRouter from './routes/media.routes'
 import { initFolder } from './utils/files'
 import { UPLOAD_IMAGE_TEMP_DIR } from './constants/dir'
-import './utils/fake'
+import bookmarkRouter from './routes/bookmark.routes'
+import likeRouter from './routes/like.routes'
+// import './utils/fake'
 
 const app = express()
 const POST = 4000
@@ -21,6 +23,8 @@ app.use('/auth', authRouter)
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
 app.use('/medias', mediaRouter)
+app.use('/bookmarks', bookmarkRouter)
+app.use('/likes', likeRouter)
 
 app.use(defaultErrorHandler)
 

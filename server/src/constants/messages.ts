@@ -79,5 +79,20 @@ export const POST_MESSAGES = {
   MENTIONS_MUST_BE_AN_ARRAY_OF_USER_ID: 'Mentions must be an array of user id',
   MEDIAS_MUST_BE_AN_ARRAY_OF_MEDIA_OBJECT: 'Medias must be an array of media object',
   CREATE_POST_SUCCESSFULLY: 'Create post successfully',
-  GET_NEW_FEEDS_SUCCESSFULLY: 'Get new feeds successfully'
-}
+  GET_NEW_FEEDS_SUCCESSFULLY: 'Get new feeds successfully',
+  INVALID_POST_ID: 'Invalid post id',
+  POST_NOT_FOUND: 'Post not found',
+  POST_ID_REQUIRED: 'Post id required'
+} as const
+
+export const BOOKMARK_MESSAGES = {
+  BOOKMARK_SUCCESSFULLY: 'Bookmark successfully',
+  UNBOOKMARK_SUCCESSFULLY: 'Unbookmark successfully',
+  YOU_HAVE_NOT_BOOKMARKED_THIS_POST: 'You have not bookmarked this post'
+} as const
+
+export const LIKE_MESSAGES = {
+  LIKE_SUCCESSFULLY: 'Like successfully',
+  UNLIKE_SUCCESSFULLY: 'Unlike successfully',
+  YOU_HAVE_NOT_LIKED_THIS_POST: 'You have not liked this post'
+} as const

@@ -13,7 +13,7 @@ export interface ScreenshotSliderProps {}
 
 export default function ScreenshotSlider(props: ScreenshotSliderProps) {
   return (
-    <div className="relative w-[375px] h-[578px]">
+    <div className="relative w-[375px] h-[578px] hidden lg:block">
       <Image src={home_phone} alt="home_phone" className="object-cover" />
       <Swiper
         modules={[EffectFade, Autoplay]}

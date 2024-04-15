@@ -13,12 +13,12 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         {children}
       </div>
       <div className="p-8 flex flex-col gap-6 items-center justify-center text-xs text-zinc-500 pb-16">
-        <ul className="flex gap-4 items-center">
+        <ul className="flex gap-4 items-center flex-wrap justify-center">
           {authFooter.row1.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <ul className="flex gap-4 items-center">
+        <ul className="flex gap-4 items-center flex-wrap justify-center">
           {authFooter.row2.map((item, index) => (
             <li key={index}>{item}</li>
           ))}

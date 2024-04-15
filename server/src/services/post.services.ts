@@ -44,11 +44,33 @@ class PostServices {
             }
           },
           {
+            $skip: limit * (page - 1)
+          },
+          {
+            $limit: limit
+          },
+          {
             $lookup: {
               from: 'users',
               localField: 'user_id',
               foreignField: '_id',
               as: 'user'
+            }
+          },
+          {
+            $lookup: {
+              from: 'bookmarks',
+              localField: '_id',
+              foreignField: 'post_id',
+              as: 'bookmarks'
+            }
+          },
+          {
+            $lookup: {
+              from: 'likes',
+              localField: '_id',
+              foreignField: 'post_id',
+              as: 'likes'
             }
           },
           {
@@ -65,6 +87,18 @@ class PostServices {
                     avatar: '$$item.avatar'
                   }
                 }
+              },
+              bookmarks: {
+                $filter: {
+                  input: '$bookmarks',
+                  as: 'item',
+                  cond: {
+                    $eq: ['$$item.user_id', user_id_obj]
+                  }
+                }
+              },
+              likes: {
+                $size: '$likes'
               }
             }
           },
@@ -72,12 +106,6 @@ class PostServices {
             $unwind: {
               path: '$user'
             }
-          },
-          {
-            $skip: limit * (page - 1)
-          },
-          {
-            $limit: limit
           }
         ])
         .toArray(),

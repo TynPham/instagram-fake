@@ -5,6 +5,8 @@ import { User } from '~/models/schemas/User.schema'
 import { RefreshToken } from '~/models/schemas/refresh_token.schema'
 import { Follower } from '~/models/schemas/follower.schema'
 import { Post } from '~/models/schemas/post.schema'
+import { Bookmark } from '~/models/schemas/bookmark.schema'
+import { Like } from '~/models/schemas/like.schemas'
 config()
 const uri = `mongodb+srv://${envConfig.mongodbUsername}:${envConfig.mongodbPassword}@instagram-dev.xuoa8cn.mongodb.net/?retryWrites=true&w=majority&appName=Instagram-dev`
 
@@ -40,6 +42,13 @@ class DataBaseService {
 
   get posts(): Collection<Post> {
     return this.db.collection(envConfig.mongodbPostsCollection)
+  }
+
+  get bookmarks(): Collection<Bookmark> {
+    return this.db.collection(envConfig.mongodbBookmarksCollection)
+  }
+  get likes(): Collection<Like> {
+    return this.db.collection(envConfig.mongodbLikesCollection)
   }
 }
 
