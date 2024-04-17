@@ -11,6 +11,13 @@ const userApi = {
         Authorization: `Bearer ${access_token}`,
       },
     }),
+
+  getSuggests: (access_token: string) =>
+    http.get<SuccessResponse<User[]>>(`${USERS_URL}/suggests`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    }),
 };
 
 export default userApi;

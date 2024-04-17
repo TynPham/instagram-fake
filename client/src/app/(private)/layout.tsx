@@ -11,6 +11,7 @@ import { TbSquarePlus } from "react-icons/tb";
 import { BsThreads } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
+import ProfileNavBar from "./components/profile-navbar";
 
 export interface PrivateLayoutProps {
   children: React.ReactNode;
@@ -45,34 +46,32 @@ export default function PrivateLayout({ children }: PrivateLayoutProps) {
               </span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <GoSearch className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Search</span>
+              <GoSearch className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Search</span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <MdOutlineExplore className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Explore</span>
+              <MdOutlineExplore className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Explore</span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <BiMoviePlay className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Reels</span>
+              <BiMoviePlay className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Reels</span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <AiOutlineMessage className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Messages</span>
+              <AiOutlineMessage className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Messages</span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <AiOutlineHeart className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Notifications</span>
+              <AiOutlineHeart className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Notifications</span>
             </li>
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <TbSquarePlus className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Create</span>
+              <TbSquarePlus className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Create</span>
             </li>
-            <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <AiOutlineProfile className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Profile</span>
-            </li>
+            <ProfileNavBar />
           </ul>
         </div>
         <ul className="flex flex-col gap-3">
           <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-            <BsThreads className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Threads</span>
+            <BsThreads className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Threads</span>
           </li>
           <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-            <AiOutlineMenu className="w-6 h-6 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">More</span>
+            <AiOutlineMenu className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">More</span>
           </li>
         </ul>
       </div>

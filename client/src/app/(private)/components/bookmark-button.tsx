@@ -11,13 +11,12 @@ export interface BookmarkProps {
   post_id: string;
 }
 
-export default function Bookmark({ bookmarked, post_id }: BookmarkProps) {
+export default function BookmarkButton({ bookmarked, post_id }: BookmarkProps) {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(bookmarked);
   const router = useRouter();
 
   const handleBookmark = async () => {
     setIsBookmarked(!isBookmarked);
-    console.log(isBookmarked);
     if (isBookmarked) {
       await postsApi.unBookmarkPost(post_id);
     } else {

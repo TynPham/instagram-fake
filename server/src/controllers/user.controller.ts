@@ -28,3 +28,14 @@ export const getMeController = async (req: Request, res: Response, next: NextFun
     result
   })
 }
+
+export const getSuggestsController = async (req: Request, res: Response, next: NextFunction) => {
+  const user_id = req.decoded_authorization?.user_id as string
+
+  const result = await userServices.getSuggests(user_id)
+
+  return res.status(HTTP_STATUS_CODE.OK).json({
+    message: USER_MESSAGES.GET_SUGGESTS_SUCCESSFULLY,
+    result
+  })
+}

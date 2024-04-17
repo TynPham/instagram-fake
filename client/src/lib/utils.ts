@@ -20,7 +20,7 @@ export const handleErrorApi = (error: any, setError?: UseFormSetError<any>, dura
   } else {
     toast({
       title: "Error",
-      description: error.payload.message || "Something went wrong",
+      description: error?.payload?.message || "Something went wrong",
       variant: "destructive",
       duration: duration || 5000,
     });

@@ -70,7 +70,8 @@ export const USER_MESSAGES = {
   REFRESH_TOKEN_SUCCESS: 'Refresh token success',
   GET_VIDEO_STATUS_SUCCESS: 'Get video status success',
   UPLOAD_IMAGE_SUCCESSFULLY: 'Upload image successfully',
-  UPLOAD_VIDEO_SUCCESSFULLY: 'Upload video successfully'
+  UPLOAD_VIDEO_SUCCESSFULLY: 'Upload video successfully',
+  GET_SUGGESTS_SUCCESSFULLY: 'Get suggests successfully'
 } as const
 
 export const POST_MESSAGES = {

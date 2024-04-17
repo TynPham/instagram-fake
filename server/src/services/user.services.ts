@@ -2,6 +2,7 @@ import { ObjectId } from 'mongodb'
 import database from './database.services'
 import { Follower } from '~/models/schemas/follower.schema'
 import { USER_MESSAGES } from '~/constants/messages'
+import { User } from '~/models/schemas/User.schema'
 
 class UserServices {
   async follow(user_id: string, followed_user_id: string) {
@@ -38,6 +39,32 @@ class UserServices {
         }
       }
     )
+    return user
+  }
+
+  async getSuggests(user_id: string) {
+    const user = await database.users
+      .aggregate<User>([
+        {
+          $match: {
+            _id: {
+              $nin: [new ObjectId(user_id)]
+            }
+          }
+        },
+        {
+          $sample: {
+            size: 5
+          }
+        },
+        {
+          $project: {
+            password: 0,
+            forgot_password_token: 0
+          }
+        }
+      ])
+      .toArray()
     return user
   }
 }
