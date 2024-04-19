@@ -25,7 +25,7 @@ export default function Post({ post }: PostProps) {
         <HiOutlineDotsHorizontal className="w-6 h-6" />
       </div>
       <div>
-        <Image src={post.medias[0].url} width={500} height={500} className="object-cover rounded-md w-full h-full" alt="post-image" />
+        <Image src={post.medias[0]?.url} width={500} height={500} className="object-cover rounded-md w-full h-full" alt="post-image" />
       </div>
       <ActionPost post={post} />
     </div>

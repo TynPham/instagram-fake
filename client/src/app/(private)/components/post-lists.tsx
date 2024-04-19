@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { DEFAULT_LIMIT_PAGINATION } from "@/constants/common";
 import { fetchMorePosts } from "@/actions/fetch-more-posts";
 import { Loader2 } from "lucide-react";
+import Suggests from "./suggests";
 
 export interface PostListsProps {
   initPosts: PostType[];
@@ -40,7 +41,11 @@ export default function PostLists({ initPosts }: PostListsProps) {
         <Post key={post._id} post={post} />
       ))}
       {isFetchMores && <Loader2 ref={ref} className="mx-auto mt-6 h-8 w-8 animate-spin" />}
-      {!isFetchMores && <p className="text-zinc-500 mt-6 text-center">No more posts</p>}
+      {!isFetchMores && (
+        <div>
+          <p className="text-zinc-500 mt-6 text-center">No more posts, please follow more</p>
+        </div>
+      )}
     </div>
   );
 }

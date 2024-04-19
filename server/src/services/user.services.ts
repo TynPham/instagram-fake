@@ -26,6 +26,25 @@ class UserServices {
       message: USER_MESSAGES.FOLLOWED
     }
   }
+  async unFollow(user_id: string, followed_user_id: string) {
+    const follower = await database.followers.findOne({
+      user_id: new ObjectId(user_id),
+      followed_user_id: new ObjectId(followed_user_id)
+    })
+
+    if (follower) {
+      await database.followers.deleteOne({
+        user_id: new ObjectId(user_id),
+        followed_user_id: new ObjectId(followed_user_id)
+      })
+      return {
+        message: USER_MESSAGES.UNFOLLOW_SUCCESS
+      }
+    }
+    return {
+      message: USER_MESSAGES.ALREADY_UNFOLLOWED
+    }
+  }
 
   async getMe(user_id: string) {
     const user = await database.users.findOne(
@@ -43,12 +62,27 @@ class UserServices {
   }
 
   async getSuggests(user_id: string) {
+    const user_id_obj = new ObjectId(user_id)
+    const follower = await database.followers
+      .find(
+        { user_id: user_id_obj },
+        {
+          projection: {
+            followed_user_id: 1,
+            _id: 0
+          }
+        }
+      )
+      .toArray()
+
+    const followed_user_ids = follower.map((item) => item.followed_user_id)
+    followed_user_ids.push(user_id_obj)
     const user = await database.users
       .aggregate<User>([
         {
           $match: {
             _id: {
-              $nin: [new ObjectId(user_id)]
+              $nin: followed_user_ids
             }
           }
         },

@@ -7,5 +7,6 @@ import screenshot3 from "./screenshot3.png";
 import screenshot4 from "./screenshot4.png";
 
 import post from "./post.jpg";
+import upload_media from "./upload-media.svg";
 
-export { logo, home_phone, screenshot1, screenshot2, screenshot3, screenshot4, post };
+export { logo, home_phone, screenshot1, screenshot2, screenshot3, screenshot4, post, upload_media };

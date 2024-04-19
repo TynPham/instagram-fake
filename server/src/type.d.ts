@@ -6,5 +6,6 @@ declare module 'express' {
   interface Request {
     user?: User
     decoded_authorization?: TokenPayload
+    decoded_refreshToken?: TokenPayload
   }
 }

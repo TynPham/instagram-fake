@@ -18,6 +18,9 @@ const userApi = {
         Authorization: `Bearer ${access_token}`,
       },
     }),
+
+  follow: (followed_user_id: string) => http.post<{ message: string }>(`${USERS_URL}/follow`, { followed_user_id }),
+  unFollow: (followed_user_id: string) => http.delete<{ message: string }>(`${USERS_URL}/follow/${followed_user_id}`),
 };
 
 export default userApi;

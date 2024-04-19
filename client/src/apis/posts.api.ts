@@ -1,5 +1,5 @@
 import { Pagination, SuccessResponse, SuccessResponseWithPagination } from "@/types/common.type";
-import { Bookmark, Like, Post } from "@/types/post.type";
+import { Bookmark, CreatePostBodyReq, Like, Post } from "@/types/post.type";
 import http from "@/utils/http";
 
 const POSTS_URL = "/posts";
@@ -24,6 +24,8 @@ const postsApi = {
       post_id,
     }),
   unBookmarkPost: (post_id: string) => http.delete<SuccessResponse<Like>>(`/bookmarks${POSTS_URL}/${post_id}`),
+
+  createPost: (body: CreatePostBodyReq) => http.post<SuccessResponse<{ [p: string]: string }>>(POSTS_URL, body),
 };
 
 export default postsApi;

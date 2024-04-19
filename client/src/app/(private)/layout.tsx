@@ -6,12 +6,23 @@ import Image from "next/image";
 import { GoHome, GoHomeFill, GoSearch } from "react-icons/go";
 import { MdOutlineExplore } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi";
-import { AiOutlineHeart, AiOutlineMenu, AiOutlineMessage, AiOutlineProfile } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineMenu, AiOutlineMessage } from "react-icons/ai";
 import { TbSquarePlus } from "react-icons/tb";
 import { BsThreads } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import ProfileNavBar from "./components/profile-navbar";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { CreatePost } from "./create/create-post";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Logout from "../(auth)/components/logout";
 
 export interface PrivateLayoutProps {
   children: React.ReactNode;
@@ -60,8 +71,15 @@ export default function PrivateLayout({ children }: PrivateLayoutProps) {
             <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
               <AiOutlineHeart className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Notifications</span>
             </li>
-            <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-              <TbSquarePlus className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Create</span>
+            <li className="hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div className="flex items-center gap-4 py-3 px-2">
+                    <TbSquarePlus className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Create</span>
+                  </div>
+                </DialogTrigger>
+                <CreatePost />
+              </Dialog>
             </li>
             <ProfileNavBar />
           </ul>
@@ -70,8 +88,19 @@ export default function PrivateLayout({ children }: PrivateLayoutProps) {
           <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
             <BsThreads className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">Threads</span>
           </li>
-          <li className="flex items-center gap-4 py-3 px-2 hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
-            <AiOutlineMenu className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">More</span>
+          <li className="hover:bg-zinc-200 rounded-lg transition-all duration-300 cursor-pointer group">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center gap-4 py-3 px-2">
+                  <AiOutlineMenu className="w-7 h-7 group-hover:scale-110 transition-all" /> <span className="hidden lg:inline">More</span>
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[17rem]">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <Logout />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </li>
         </ul>
       </div>

@@ -85,3 +85,9 @@
 .swiper-button-prev:after {
   @apply text-black !text-base;
 }
+
+/* dialog create post */
+
+.dialog-post > button:last-child {
+  @apply hidden;
+}

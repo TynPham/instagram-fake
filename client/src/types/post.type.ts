@@ -29,3 +29,10 @@ export type Bookmark = {
 };
 
 export type Like = Bookmark;
+
+export type CreatePostBodyReq = {
+  captions?: string;
+  hashtags?: string[];
+  medias: MediaType[];
+  mentions?: string[];
+};

@@ -2,6 +2,7 @@ import userApi from "@/apis/user.api";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { cookies } from "next/headers";
 import * as React from "react";
+import Follow from "./follow";
 
 export interface SuggestsProps {}
 
@@ -22,7 +23,7 @@ export default async function Suggests(props: SuggestsProps) {
               <span className="text-zinc-500">Suggested for you</span>
             </article>
           </div>
-          <span className="text-blue-500 font-bold text-xs cursor-pointer hover:opacity-70">Follow</span>
+          <Follow user_id={user._id} />
         </li>
       ))}
     </ul>
